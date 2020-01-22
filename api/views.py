@@ -1,3 +1,4 @@
+from django.core import exceptions
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views import View
@@ -7,7 +8,7 @@ from django.utils.decorators import method_decorator
 from rest_framework import generics, status
 from rest_framework.response import Response
 # local
-from api.models import Author, Book
+from api.models import Book
 from api.serializers import BookSerializer
 
 
@@ -32,9 +33,13 @@ class BookDetail(generics.RetrieveUpdateDestroyAPIView):
         return Book.objects.get(pk=id)
 
     def get(self, request, id, *args, **kwargs):
-        current_book = self.get_object(id)
-        serializer = self.get_serializer(current_book)
-        return Response(serializer.data)
+        try:
+            current_book = self.get_object(id)
+            serializer = self.get_serializer(current_book)
+            return Response(serializer.data)
+        except exceptions.ObjectDoesNotExist as err:
+            print(err)
+            return Response('NOT FOUND', status=status.HTTP_404_NOT_FOUND)
 
     def put(self, request, id, *args, **kwargs):
         book_data = {
@@ -50,8 +55,12 @@ class BookDetail(generics.RetrieveUpdateDestroyAPIView):
         return Response(None, status=status.HTTP_412_PRECONDITION_FAILED)
     
     def delete(self, request, id, *args, **kwargs):
-        return self.destroy(request, id, *args, **kwargs)
-    
+        try:
+            return self.destroy(request, id, *args, **kwargs)
+        except exceptions.ObjectDoesNotExist as err:
+            print(err)
+            return Response('NOT FOUND', status=status.HTTP_404_NOT_FOUND)
+
     def destroy(self, request, id, *args, **kwargs):
         instance = self.get_object(id)
         instance.delete()
