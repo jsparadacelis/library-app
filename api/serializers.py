@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from api.models import Author, Book
+from api.models import Book
 
 
 class BookSerializer(serializers.ModelSerializer):
@@ -8,10 +8,6 @@ class BookSerializer(serializers.ModelSerializer):
         fields = ['title', 'subject', 'author']
 
     def save(self, validated_data):
-        author_id = validated_data.pop('author')
-        author = Author.objects.get(id=author_id)
-        author_data = {'author': author}
-        validated_data = {**validated_data, **author_data}
         try:
             book_object = Book(**validated_data)
             book_object.save()
