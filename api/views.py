@@ -54,5 +54,5 @@ class BookDetail(generics.RetrieveUpdateDestroyAPIView):
     
     def destroy(self, request, id, *args, **kwargs):
         instance = self.get_object(id)
-        print(instance)
+        instance.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
