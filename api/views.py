@@ -13,6 +13,7 @@ from api.serializers import BookSerializer
 
 
 class BookList(generics.ListCreateAPIView):
+    """ Books list view, for list and create many books """
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
@@ -26,6 +27,7 @@ class BookList(generics.ListCreateAPIView):
         return Response(None, status=status.HTTP_412_PRECONDITION_FAILED)
 
 class BookDetail(generics.RetrieveUpdateDestroyAPIView):
+    """ Book Detail view, for create, update, get and delete an unique book """
 
     serializer_class = BookSerializer
 
@@ -42,6 +44,9 @@ class BookDetail(generics.RetrieveUpdateDestroyAPIView):
             return Response('NOT FOUND', status=status.HTTP_404_NOT_FOUND)
 
     def put(self, request, id, *args, **kwargs):
+
+        # creates a new dict in order to django will allowed to decide
+        # run an updating or a creation
         book_data = {
             'id': id
         }
