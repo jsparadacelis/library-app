@@ -1,0 +1,11 @@
+[
+    {
+        "pk": 1,
+        "model": "api.book",
+        "fields": {
+            "title": "Rayuela",
+            "subject": "Amor",
+            "author": "Gabo"
+        }
+    }
+]

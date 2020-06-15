@@ -1,9 +1,4 @@
 from django.core import exceptions
-from django.http import JsonResponse
-from django.shortcuts import render
-from django.views import View
-from django.views.decorators.csrf import csrf_exempt
-from django.utils.decorators import method_decorator
 # rest framework
 from rest_framework import generics, status
 from rest_framework.response import Response
@@ -25,6 +20,7 @@ class BookList(generics.ListCreateAPIView):
                 return Response(book_saved, status=status.HTTP_400_BAD_REQUEST)
             return Response(book_saved, status=status.HTTP_201_CREATED)
         return Response(None, status=status.HTTP_412_PRECONDITION_FAILED)
+
 
 class BookDetail(generics.RetrieveUpdateDestroyAPIView):
     """ Book Detail view, for create, update, get and delete an unique book """
@@ -58,7 +54,7 @@ class BookDetail(generics.RetrieveUpdateDestroyAPIView):
                 return Response(book_saved, status=status.HTTP_400_BAD_REQUEST)
             return Response(book_saved, status=status.HTTP_200_OK)
         return Response(None, status=status.HTTP_412_PRECONDITION_FAILED)
-    
+
     def delete(self, request, id, *args, **kwargs):
         try:
             return self.destroy(request, id, *args, **kwargs)

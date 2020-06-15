@@ -86,14 +86,13 @@ WSGI_APPLICATION = 'libraryapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ebdb',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
+        'NAME': 'test',
+        'USER': 'juan',
+        'PASSWORD': 'peres',
         'HOST': 'db',
         'PORT': 5432,
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

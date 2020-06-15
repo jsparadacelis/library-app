@@ -15,10 +15,12 @@ services:
     volumes:
       - local_postgres_data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=ebdb
+      - POSTGRES_USER=juan
+      - POSTGRES_PASSWORD=peres
+      - POSTGRES_DB=test
     ports:
-      - "5432:5432"
+      - "2345:5432"
+    expose:
+      - 2345
 volumes:
   local_postgres_data:

@@ -1,6 +1,0 @@
-- model: api.book
-  pk: 1
-  fields:
-    title: Rayuela
-    subject: Amor
-    author: Cortazar
