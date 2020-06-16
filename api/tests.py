@@ -34,7 +34,7 @@ class BookListTest(TestCase):
 
 class BookDetailTest(TestCase):
 
-    fixtures = ['book_fixtures.json']
+    fixtures = ['book.json']
 
     def setUp(self):
         self.client = Client()

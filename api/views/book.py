@@ -2,7 +2,7 @@ from django.core import exceptions
 # rest framework
 from rest_framework import generics, status
 from rest_framework.response import Response
-# local
+
 from api.models import Book
 from api.serializers import BookSerializer
 

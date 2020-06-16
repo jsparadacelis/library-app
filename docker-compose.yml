@@ -22,5 +22,13 @@ services:
       - "2345:5432"
     expose:
       - 2345
+  redis:
+    image: redis:6.0.5-alpine
+    restart: always
+    ports:
+      - "6379:6379"
+    expose:
+      - 6379
+    command: sh -c "redis-server && redis-cli monitor"
 volumes:
   local_postgres_data:
