@@ -1,6 +1,7 @@
 from django.core import exceptions
 # rest framework
 from rest_framework import generics, status
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from api.models import Book
@@ -10,6 +11,7 @@ from api.serializers import BookSerializer
 class BookList(generics.ListCreateAPIView):
     """ Books list view, for list and create many books """
     queryset = Book.objects.all()
+    # permission_classes = [IsAuthenticated]
     serializer_class = BookSerializer
 
     def create(self, request, *args, **kwargs):
@@ -25,6 +27,7 @@ class BookList(generics.ListCreateAPIView):
 class BookDetail(generics.RetrieveUpdateDestroyAPIView):
     """ Book Detail view, for create, update, get and delete an unique book """
 
+    # permission_classes = [IsAuthenticated]
     serializer_class = BookSerializer
 
     def get_object(self, id):
