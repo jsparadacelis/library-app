@@ -5,3 +5,5 @@
     2.  docker-compose up --build
 ## Run tests:
     1.  docker-compose run web python manage.py test
+## See own documentation
+    On your navigation bar: http://0.0.0.0:8000/book
