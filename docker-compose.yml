@@ -3,11 +3,8 @@ version: '3'
 services:
   web:
     build: .
-    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
-    volumes:
-      - .:/code
     ports:
-      - "80:8000"
+      - "8000:8000"
     depends_on:
       - db
   db:
@@ -15,13 +12,13 @@ services:
     volumes:
       - local_postgres_data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_USER=juan
-      - POSTGRES_PASSWORD=peres
-      - POSTGRES_DB=test
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=books_db
     ports:
-      - "2345:5432"
+      - "5432:5432"
     expose:
-      - 2345
+      - 5432
   redis:
     image: redis:6.0.5-alpine
     restart: always

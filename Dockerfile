@@ -1,8 +1,12 @@
 FROM python:3.7-slim-stretch
 ENV PYTHONUNBUFFERED 1
-RUN mkdir /code
-WORKDIR /code
-COPY requirements.txt /code/
-RUN pip install -r requirements.txt
-EXPOSE 2345
-COPY . /
+
+WORKDIR app
+
+COPY requirements.txt /app/requirements.txt
+RUN pip install -r /app/requirements.txt
+
+EXPOSE 5432
+COPY . .
+RUN chmod +x entrypoint.sh
+ENTRYPOINT ["/app/entrypoint.sh"]
