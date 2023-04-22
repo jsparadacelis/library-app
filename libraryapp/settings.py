@@ -87,9 +87,9 @@ WSGI_APPLICATION = 'libraryapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'test',
-        'USER': 'juan',
-        'PASSWORD': 'peres',
+        'NAME': 'books_db',
+        'USER': 'root',
+        'PASSWORD': 'root',
         'HOST': 'db',
         'PORT': 5432,
     }
@@ -100,13 +100,13 @@ DATABASES = {
 CACHE_TIME = 60*60
 
 CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://redis:6379",
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient"
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://redis:6379',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient'
         },
-        "KEY_PREFIX": "book_api"
+        'KEY_PREFIX': 'book_api'
     }
 }
 

@@ -1,5 +1,4 @@
 from django.core import exceptions
-# rest framework
 from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -15,9 +14,14 @@ class BookList(generics.ListCreateAPIView):
     serializer_class = BookSerializer
 
     def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
+        book = {
+            'title': request.data.get('title'),
+            'subject': request.data.get('subject'),
+            'author': request.data.get('author'),
+        }
+        serializer = self.get_serializer(data=book)
         if serializer.is_valid(raise_exception=True):
-            book_saved = serializer.save(request.data)
+            book_saved = serializer.save(book)
             if book_saved == {}:
                 return Response(book_saved, status=status.HTTP_400_BAD_REQUEST)
             return Response(book_saved, status=status.HTTP_201_CREATED)
